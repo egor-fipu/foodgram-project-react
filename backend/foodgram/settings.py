@@ -6,7 +6,7 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY', default='ogjsDAfZcmVek5GZP5T3eeetqnepBmRT6S53guBkxV9XDpFE5V'
 )
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
