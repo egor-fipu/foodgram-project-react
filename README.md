@@ -6,6 +6,13 @@
 добавлять понравившиеся рецепты в список "Избранное" 
 и скачивать список продуктов из "Избранное" в файл.
 
+## Проект доступен по ссылке:
+
+http://84.201.131.156/
+
+- admin login: egersiya@yandex.ru
+- admin password: test_password
+
 ## Для авторизованных пользователей доступны:
 
 - Главная страница.
@@ -23,3 +30,63 @@
 - Страница любого пользователя.
 - Страница авторизации.
 - Страница регистрации.
+
+# Запуск на локальном сервере
+
+1. Клонировать репозиторий
+
+```bash
+git clone https://github.com/egor-fipu/foodgram-project-react.git
+```
+
+2. Установить docker и docker-compose
+
+Инструкция по установке доступна в официальной инструкции
+
+3. В папке с проектом перейти в infra и создать файл .env
+
+Добавить следующее содержимое
+```
+SECRET_KEY = Секретный ключ django
+ALLOWED_HOSTS = Разрешенные подключения
+DB_ENGINE= django.db.backends.postgresql
+DB_NAME= Имя базы данных
+POSTGRES_USER= Пользователь базы данных
+POSTGRES_PASSWORD= Пароль базы данных
+DB_HOST= Хост базы данных
+DB_PORT= Порт базы данных
+```
+4. В папке infra выполнить команду
+```
+docker-compose up
+```
+
+## Запуск на удаленном сервере
+1. В папке с проектом перейти в infra и создать файл .env 
+с таким же содержимым как и для запуска на локальном сервере
+2. Копировать файлы из папки infra на сервер
+```
+scp docker-compose.yaml <user>@<server-ip>:
+scp .env <user>@<server-ip>:
+scp nginx.conf <user>@<server-ip>:
+```
+
+3. Cоздать переменные окружения в разделе `secrets` гитхаб репозитория:
+```
+DOCKER_PASSWORD # Пароль от Docker Hub
+DOCKER_USER # Логин от Docker Hub
+HOST # Публичный ip адрес сервера
+USER # Пользователь зарегистрированный на сервере
+PASSPHRASE # Если ssh-ключ защищен фразой-паролем
+SSH_KEY # Приватный ssh-ключ
+```
+4. В nginx.conf указать server_name(ip or domain)
+
+### При пуше в master:
+1. Проверка кода на соответствие стандарту PEP8
+2. Сборка докер-образов.
+3. Пуш на DockerHub.
+4. Деплой на удаленный сервер.
+
+
+![foodgram](https://github.com/egor-fipu/foodgram-project-react/workflows/foodgram/badge.svg)
