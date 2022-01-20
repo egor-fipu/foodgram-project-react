@@ -12,12 +12,9 @@ class IngredientsFilter(filters.FilterSet):
 
 
 class RecipeFilter(filters.FilterSet):
-    tags = filters.AllValuesMultipleFilter(
-        field_name='tags__slug', label='Tags')
-    is_favorited = filters.BooleanFilter(
-        method='get_favorite', label='Favorited')
-    is_in_shopping_cart = filters.BooleanFilter(
-        method='get_shopping', label='Is in shopping list')
+    tags = filters.AllValuesMultipleFilter(field_name='tags__slug')
+    is_favorited = filters.BooleanFilter(method='get_favorite')
+    is_in_shopping_cart = filters.BooleanFilter(method='get_shopping')
 
     class Meta:
         model = Recipe
